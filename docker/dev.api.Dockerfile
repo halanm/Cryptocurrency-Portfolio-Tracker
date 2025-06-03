@@ -30,7 +30,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     mkdir -p api/tmp api/log && \
-    chown -R 1000:1000 api/db api/log api/storage api/tmp
+    chown -R 1000:1000 api/log api/tmp
 USER 1000:1000
 
 EXPOSE 3000
