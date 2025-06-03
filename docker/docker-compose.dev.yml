@@ -10,6 +10,13 @@ services:
       - POSTGRES_PASSWORD=cpt
     ports:
       - "5432:5432"
+  redis:
+    image: redis:7.2-alpine
+    container_name: cpt-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
   api:
     container_name: cpt-api
     build:
@@ -24,8 +31,10 @@ services:
       - ../api:/api
     depends_on:
       - db
+      - redis
     ports:
       - "3000:3000"
 
 volumes:
   postgres_data: {}
+  redis_data: {}

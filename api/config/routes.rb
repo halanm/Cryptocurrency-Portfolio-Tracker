@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   post "auth/login", to: "auth#login"
   post "auth/signup", to: "auth#signup"
+  post "auth/refresh", to: "auth#refresh"
   
   resources :users, only: [:index]
 
