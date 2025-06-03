@@ -1,4 +1,6 @@
 class TokensController < ApplicationController
+  skip_before_action :authenticate_request
+  
   def index
     tokens = Token.all.as_json(except: [:created_at, :updated_at])
     symbols = tokens.map { |token| token['symbol'].downcase }.uniq.join(',')
