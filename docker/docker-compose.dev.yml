@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:14.2-alpine
+    container_name: cpt-db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=cpt
+      - POSTGRES_USER=cpt
+      - POSTGRES_PASSWORD=cpt
+    ports:
+      - "5432:5432"
+  api:
+    container_name: cpt-api
+    build:
+      context: ../api
+      dockerfile: ../docker/dev.api.Dockerfile
+    command: "./bin/dev -b 0.0.0.0"
+    env_file:
+      - ../api/.env.development
+    environment:
+      - RAILS_ENV=development
+    volumes:
+      - ../api:/api
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data: {}
