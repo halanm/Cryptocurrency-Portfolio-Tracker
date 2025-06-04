@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post "auth/signup", to: "auth#signup"
   post "auth/refresh", to: "auth#refresh"
   
-  resources :users, only: [:index] do
+  resources :users, only: [:update] do
     collection do
       get "me", to: "users#me"
     end

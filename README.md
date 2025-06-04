@@ -106,3 +106,21 @@ A full-stack application for managing cryptocurrency portfolios.
     "prefferred_currency": "prefferred_currency"
   }
   ``` 
+
+- `PUT /users/{id}`  
+  **Headers:** `Authorization: Bearer <JWT>`  
+  **Body:**  
+  ```json
+  {
+    "prefferred_currency": "prefferred_currency"
+  }
+  ```
+  **Response:**  
+  ```json
+  {
+    "id": 1,
+    "email": "email",
+    "wallet_address": "wallet_address",
+    "prefferred_currency": "prefferred_currency"
+  }
+  ```
