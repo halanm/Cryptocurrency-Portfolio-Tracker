@@ -124,3 +124,21 @@ A full-stack application for managing cryptocurrency portfolios.
     "prefferred_currency": "prefferred_currency"
   }
   ```
+
+
+### Tokens
+- `GET /tokens`  
+  **Response:**  
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "name",
+      "symbol": "symbol",
+      "contract_address": "contract_address",
+      "price": 1,
+      "market_cap": 1,
+      "change_percentage": 1
+    },
+  ]
+  ```
