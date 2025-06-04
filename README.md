@@ -58,3 +58,10 @@ A full-stack application for managing cryptocurrency portfolios.
 - `POST /auth/refresh`  
   **Body:** `{ refresh_token }`  
   **Response:** `{ token, refresh_token }`
+
+
+### Users
+
+- `GET /users/me`  
+  **Headers:** `Authorization: Bearer <JWT>`  
+  **Response:** `{ id, email, wallet_address, prefferred_currency }`

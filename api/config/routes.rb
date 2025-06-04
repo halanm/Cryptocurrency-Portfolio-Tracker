@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   post "auth/signup", to: "auth#signup"
   post "auth/refresh", to: "auth#refresh"
   
-  resources :users, only: [:index]
+  resources :users, only: [:index] do
+    collection do
+      get "me", to: "users#me"
+    end
+  end
 
   resources :tokens, only: [:index]
 end
