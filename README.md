@@ -46,22 +46,63 @@ A full-stack application for managing cryptocurrency portfolios.
 ## API Routes
 
 ### Authentication
-
 - `POST /auth/signup`  
-  **Body:** `{ email, password }`  
-  **Response:** `{ token, refresh_token }`
+  **Body:**  
+  ```json
+  {
+    "email": "email",
+    "password": "password"
+  }
+  ```
+  **Response:**  
+  ```json
+  {
+    "token": "token",
+    "refresh_token": "refresh_token"
+  }
+  ```
 
 - `POST /auth/login`  
-  **Body:** `{ email, password }`  
-  **Response:** `{ token, refresh_token }`
+  **Body:**  
+  ```json
+  {
+    "email": "email",
+    "password": "password"
+  }
+  ```
+  **Response:**  
+  ```json
+  {
+    "token": "token",
+    "refresh_token": "refresh_token"
+  }
+  ```
 
 - `POST /auth/refresh`  
-  **Body:** `{ refresh_token }`  
-  **Response:** `{ token, refresh_token }`
+  **Body:**  
+  ```json
+  {
+    "refresh_token": "refresh_token"
+  }
+  ```
+  **Response:**  
+  ```json
+  {
+    "token": "token",
+    "refresh_token": "refresh_token"
+  }
+  ```
 
 
 ### Users
-
 - `GET /users/me`  
   **Headers:** `Authorization: Bearer <JWT>`  
-  **Response:** `{ id, email, wallet_address, prefferred_currency }`
+  **Response:**  
+  ```json
+  {
+    "id": 1,
+    "email": "email",
+    "wallet_address": "wallet_address",
+    "prefferred_currency": "prefferred_currency"
+  }
+  ``` 
