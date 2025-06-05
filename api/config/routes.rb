@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     collection do
       get "me", to: "users#me"
       patch "me", to: "users#update"
+      get "me/portfolios", to: "portfolios#get_user_portfolios"
+      post "me/portfolios", to: "portfolios#create_portfolio"
     end
   end
 
