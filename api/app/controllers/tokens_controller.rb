@@ -7,9 +7,7 @@ class TokensController < ApplicationController
     coingecko_response = Faraday.get("https://api.coingecko.com/api/v3/coins/markets", {
       symbols: symbols,
       vs_currency: 'usd'
-    }) do |req|
-      req.headers['x-cg-demo-api-key'] = ENV['COINGECKO_API_KEY']
-    end
+    })
     token_data = JSON.parse(coingecko_response.body)
     tokens.each do |token|
       symbol = token['symbol'].downcase
