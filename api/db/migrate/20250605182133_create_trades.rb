@@ -4,7 +4,7 @@ class CreateTrades < ActiveRecord::Migration[8.0]
       t.string :token_symbol
       t.decimal :amount_invested
       t.decimal :quantity
-      t.decimal :price_at_trade
+      t.string :currency
       t.string :trade_type
 
       t.timestamps

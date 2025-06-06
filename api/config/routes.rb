@@ -14,5 +14,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :portfolios, only: [] do
+    collection do
+      get "/:portfolio_id/trades", to: "trades#get_portfolio_trades"
+      post "/:portfolio_id/trades", to: "trades#create_trade"
+    end
+  end
+
   resources :tokens, only: [:index]
 end

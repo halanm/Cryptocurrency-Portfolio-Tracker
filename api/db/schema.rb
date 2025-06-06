@@ -34,7 +34,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_05_183426) do
     t.string "token_symbol"
     t.decimal "amount_invested"
     t.decimal "quantity"
-    t.decimal "price_at_trade"
+    t.string "currency"
     t.string "trade_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
