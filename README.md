@@ -125,6 +125,73 @@ A full-stack application for managing cryptocurrency portfolios.
   }
   ```
 
+- `GET /users/me/portfolios`  
+  **Headers:** `Authorization: Bearer <JWT>`  
+  **Response:**  
+  ```json
+  [
+    {
+      "id": 1,
+      "name": "name"
+    }
+  ]
+  ```
+
+- `POST /users/me/portfolios`  
+  **Headers:** `Authorization: Bearer <JWT>`  
+  **Body:**  
+  ```json
+  {
+    "name": "name"
+  }
+  ```
+  **Response:**  
+  ```json
+  {
+    "id": 1,
+    "name": "name"
+  }
+  ```
+
+### Portfolios
+- `GET /portfolios/{id}/trades`  
+  **Headers:** `Authorization: Bearer <JWT>`  
+  **Response:**  
+  ```json
+  [
+    {
+      "id": 1,
+      "token_symbol": "token_symbol",
+      "amount_invested": "amount_invested",
+      "quantity": "quantity",
+      "currency": "currency",
+      "trade_type": "trade_type",
+      "current_value": "current_value"
+    }
+  ]
+  ```
+
+- `POST /portfolios/{id}/trades`
+  **Headers:** `Authorization: Bearer <JWT>`  
+  **Body:**  
+  ```json
+  {
+    "token_symbol": "token_symbol",
+    "amount_invested": "amount_invested",
+    "trade_type": "trade_type"
+  }
+  ```
+  **Response:**  
+  ```json
+  {
+    "id": 1,
+    "token_symbol": "token_symbol",
+    "amount_invested": "amount_invested",
+    "quantity": "quantity",
+    "currency": "currency",
+    "trade_type": "trade_type"
+  }
+  ```
 
 ### Tokens
 - `GET /tokens`  
