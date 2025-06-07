@@ -15,10 +15,45 @@ class TradesController < ApplicationController
 
     trades = Trade.where(portfolio_id: portfolio_id)
 
+    tokens_by_currency = trades.group_by(&:currency).transform_values do |trades_group|
+      trades_group.map { |trade| trade.token_symbol }.uniq
+    end
+    
+    tokens_price_data = {}
+    tokens_by_currency.each do |currency, tokens|
+      coingecko_response = Faraday.get("https://api.coingecko.com/api/v3/coins/markets", {
+        symbols: tokens.join(',').upcase,
+        vs_currency: currency.upcase
+      })
+      
+
+      if coingecko_response.status == 200 && coingecko_response.body
+        tokens = JSON.parse(coingecko_response.body)
+        tokens_price_data[currency] = {}
+        tokens.each do |token|
+          symbol = token['symbol'].upcase
+          tokens_price_data[currency][symbol] = { currency.downcase => token['current_price'] }
+        end
+      else
+        render json: { message: "Failed to fetch token data for currency #{currency}." }, status: :bad_gateway
+        return
+      end
+    end
+
+    trades_with_prices = trades.map do |trade|
+      price = nil
+      if tokens_price_data[trade.currency] && tokens_price_data[trade.currency][trade.token_symbol.upcase]
+        price = tokens_price_data[trade.currency][trade.token_symbol.upcase][trade.currency.downcase]
+      end
+      current_value = price && trade.quantity ? (trade.quantity * price) : nil
+      trade.as_json.merge('current_value' => current_value)
+    end
+
     if trades.empty?
       render json: { message: "No trades found for this portfolio." }, status: :not_found
     else
-      render json: trades, status: :ok
+      filtered_trades = trades_with_prices.map { |trade| trade.except('portfolio_id', 'created_at', 'updated_at') }
+      render json: filtered_trades, status: :ok
     end
   end
   def create_trade
@@ -62,7 +97,7 @@ class TradesController < ApplicationController
     trade.portfolio_id = portfolio.id
 
     if trade.save
-      render json: trade, status: :created
+      render json: trade.as_json(except: [:portfolio_id, :created_at, :updated_at]), status: :created
     else
       render json: { errors: trade.errors.full_messages }, status: :unprocessable_entity
     end
