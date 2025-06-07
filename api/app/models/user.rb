@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :portfolios, dependent: :destroy
+  has_many :wallets, dependent: :destroy
 
   has_secure_password
   
