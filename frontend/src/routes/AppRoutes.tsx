@@ -2,9 +2,11 @@ import React from 'react';
 import { type RouteObject, useRoutes } from 'react-router';
 import { publicRoutes } from './public';
 
+import type { ReactElement } from 'react';
+
 type Route = {
   path: string;
-  element: JSX.Element;
+  element: ReactElement;
 };
 
 export function AppRoutes() {
