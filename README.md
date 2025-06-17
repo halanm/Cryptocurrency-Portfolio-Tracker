@@ -14,18 +14,13 @@ A full-stack application for managing cryptocurrency portfolios.
    cd Cryptocurrency-Portfolio-Tracker
    ```
 
-2. **Set up API environment variables:**
-   - Copy the example file and edit as needed:
+2. **Set up environment variables:**
+   - Copy the example files and edit as needed:
      ```sh
      cp api/.env.example api/.env.development
      ```
-   - Edit the `.env.development` file in the API root directory and fill in the values:
-     ```
-     COINGECKO_API_KEY=""
-
-     SECRET_KEY_BASE="your_secret_key"
-
-     RAILS_MASTER_KEY=""
+     ```sh
+     cp frontend/.env.example frontend/.env.development
      ```
 
 3. **Start the containers:**
@@ -38,8 +33,10 @@ A full-stack application for managing cryptocurrency portfolios.
    docker exec cpt-api bin/rails db:migrate
    ```
 
-5. **Access the API:**
+5. **Access the application:**
    - The Rails API will be available at [http://localhost:3000](http://localhost:3000)
+
+   - The React frontend will be available at [http://localhost:5173](http://localhost:5173)
 
 ---
 
