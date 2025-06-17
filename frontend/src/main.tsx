@@ -1,20 +1,37 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router';
-import { AppRoutes } from './routes/AppRoutes';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router";
+import { AppRoutes } from "./routes/AppRoutes";
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import "./index.css";
 
-import './index.css'
+import { createTheme, ThemeProvider } from "@mui/material";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#0f5bbc",
+    },
+    secondary: {
+      main: "#e0e0e0",
+    },
+    text: {
+      primary: "#0d0d0d",
+      secondary: "#7c7c7c",
+    },
+  },
+  typography: {
+    fontFamily: ["Inter", "Space Grotesk"].join(","),
+  },
+  cssVariables: true,
+});
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <AppRoutes />
+      <ThemeProvider theme={theme}>
+        <AppRoutes />
+      </ThemeProvider>
     </BrowserRouter>
-  </StrictMode>,
-)
+  </StrictMode>
+);
