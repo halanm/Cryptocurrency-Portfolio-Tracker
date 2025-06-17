@@ -34,6 +34,19 @@ services:
       - redis
     ports:
       - "3000:3000"
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../docker/dev.frontend.Dockerfile
+    container_name: cpt-frontend
+    env_file:
+      - ../frontend/.env.development
+    volumes:
+      - ../frontend:/frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
 
 volumes:
   postgres_data: {}
