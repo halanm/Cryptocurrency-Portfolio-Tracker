@@ -46,7 +46,7 @@ createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
-          <RainbowKitProvider>
+          <RainbowKitProvider modalSize="compact">
             <ThemeProvider theme={theme}>
               <AppRoutes />
             </ThemeProvider>
