@@ -1,8 +1,10 @@
-import React from 'react';
-import { type RouteObject, useRoutes } from 'react-router';
-import { publicRoutes } from './public';
+import React from "react";
+import { type RouteObject, useRoutes } from "react-router";
 
-import type { ReactElement } from 'react';
+import { publicRoutes } from "./public";
+import { fallbackRoutes } from "./fallback";
+
+import type { ReactElement } from "react";
 
 type Route = {
   path: string;
@@ -10,9 +12,7 @@ type Route = {
 };
 
 export function AppRoutes() {
-  const parseRouteObjects = (
-    routes: Route[],
-  ): RouteObject[] => {
+  const parseRouteObjects = (routes: Route[]): RouteObject[] => {
     return routes.map((route) => ({
       path: route.path,
       element: route.element,
@@ -20,10 +20,9 @@ export function AppRoutes() {
   };
 
   const publicRouteObjects = parseRouteObjects(publicRoutes);
+  const fallbackRouteObjects = parseRouteObjects(fallbackRoutes);
 
-  const routes = [
-    ...publicRouteObjects,
-  ];
+  const routes = [...publicRouteObjects, ...fallbackRouteObjects];
 
   const allRoutes = useRoutes(routes);
 
