@@ -13,7 +13,9 @@ export function LoginForm() {
     login(
       { email, password },
       {
-        onSuccess: () => console.log("Login successful"),
+        onSuccess: () => {
+          window.location.href = "/";
+        },
       }
     );
   };
