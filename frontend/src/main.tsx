@@ -17,11 +17,17 @@ import { UserProvider } from "./providers/UserProvider";
 
 const theme = createTheme({
   palette: {
+    background: {
+      default: "#f7f7f7",
+      paper: "#ffffff",
+    },
     primary: {
-      main: "#0f5bbc",
+      main: "#0060f2",
     },
     secondary: {
+      light: "#f0f0f0",
       main: "#e0e0e0",
+      dark: "#c0c0c0",
     },
     text: {
       primary: "#0d0d0d",

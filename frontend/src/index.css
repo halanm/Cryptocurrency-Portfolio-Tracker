@@ -2,13 +2,18 @@
 
 html,
 body {
-  --background-primary: #f7f7f7;
-
   margin: 0;
   height: 100%;
-  background-color: var(--background-primary);
 }
 
 *:focus {
   outline: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: currentColor !important;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
 }
