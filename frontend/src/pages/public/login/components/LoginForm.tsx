@@ -1,12 +1,25 @@
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { useLoginMutation } from "../../../../hooks/auth/useLoginMutation";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { mutate: login } = useLoginMutation();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    login(
+      { email, password },
+      {
+        onSuccess: () => console.log("Login successful"),
+      }
+    );
+  };
+
   return (
-    <Box component="form" noValidate>
+    <Box onSubmit={handleSubmit} component="form" noValidate>
       <TextField
         label="Email"
         type="email"
