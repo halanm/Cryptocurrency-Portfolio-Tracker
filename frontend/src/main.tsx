@@ -13,6 +13,7 @@ import { getDefaultConfig, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
 import { mainnet, base } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { UserProvider } from "./providers/UserProvider";
 
 const theme = createTheme({
   palette: {
@@ -48,7 +49,9 @@ createRoot(document.getElementById("root")!).render(
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider modalSize="compact">
             <ThemeProvider theme={theme}>
-              <AppRoutes />
+              <UserProvider>
+                <AppRoutes />
+              </UserProvider>
             </ThemeProvider>
           </RainbowKitProvider>
         </QueryClientProvider>
