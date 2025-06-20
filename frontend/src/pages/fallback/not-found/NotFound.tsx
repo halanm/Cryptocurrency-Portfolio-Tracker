@@ -1,6 +1,7 @@
-import { Box, Typography, Button, Container } from "@mui/material";
+import { Box, Typography, Container } from "@mui/material";
 import { useNavigate } from "react-router";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { BaseButton } from "../../../ui/BaseButton/BaseButton";
 
 export function NotFound() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ export function NotFound() {
           The page you are looking for might have been removed, had its name
           changed, or is temporarily unavailable.
         </Typography>
-        <Button
+        <BaseButton
           variant="contained"
           color="primary"
           size="large"
@@ -40,7 +41,7 @@ export function NotFound() {
           sx={{ mt: 2 }}
         >
           Go to Home
-        </Button>
+        </BaseButton>
       </Box>
     </Container>
   );

@@ -1,14 +1,14 @@
-import { Button } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import WalletIcon from "@mui/icons-material/Wallet";
+import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
 
 export const WalletLoginButton = () => {
   return (
     <ConnectButton.Custom>
       {({ openConnectModal, mounted }) => {
         return (
-          <Button
+          <BaseButton
             disabled={!mounted}
             onClick={openConnectModal}
             variant="contained"
@@ -17,7 +17,7 @@ export const WalletLoginButton = () => {
             startIcon={<WalletIcon />}
           >
             Login with Wallet
-          </Button>
+          </BaseButton>
         );
       }}
     </ConnectButton.Custom>

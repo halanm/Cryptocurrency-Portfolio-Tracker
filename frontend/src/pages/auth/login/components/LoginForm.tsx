@@ -1,6 +1,7 @@
-import { Box, Button, Link, TextField, Typography } from "@mui/material";
+import { Box, Link, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useLoginMutation } from "../../../../hooks/auth/useLoginMutation";
+import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -52,7 +53,7 @@ export function LoginForm() {
           I forgot my password
         </Link>
       </Typography>
-      <Button
+      <BaseButton
         type="submit"
         variant="contained"
         color="primary"
@@ -60,7 +61,7 @@ export function LoginForm() {
         sx={{ mt: 2 }}
       >
         Login
-      </Button>
+      </BaseButton>
     </Box>
   );
 }

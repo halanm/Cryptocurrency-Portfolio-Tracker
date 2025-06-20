@@ -1,4 +1,4 @@
-import { Box, Drawer, Button, Divider } from "@mui/material";
+import { Box, Drawer, Divider } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ViewSidebarIcon from "@mui/icons-material/ViewSidebarRounded";
 
@@ -6,6 +6,7 @@ import logoIcon from "../../../assets/logo-icon.png";
 import logoText from "../../../assets/logo-text.png";
 
 import HomeIcon from "@mui/icons-material/Home";
+import { BaseButton } from "../../BaseButton/BaseButton";
 
 const navItems = [{ label: "Dashboard", icon: <HomeIcon /> }];
 
@@ -140,7 +141,7 @@ function SideBarButton({
   onClick,
 }: SidebarButtonProps) {
   return (
-    <Button
+    <BaseButton
       color="secondary"
       variant="contained"
       sx={{
@@ -169,6 +170,6 @@ function SideBarButton({
     >
       {icon}
       {expanded ? text : ""}
-    </Button>
+    </BaseButton>
   );
 }
