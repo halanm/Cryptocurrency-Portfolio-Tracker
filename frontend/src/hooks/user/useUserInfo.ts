@@ -3,7 +3,7 @@ import { api } from "../../lib/axiosInstance";
 import type { User } from "../../domain/User";
 import { AuthService } from "../../services/authService";
 
-export const useUserQuery = () => {
+export const useUserInfo = () => {
   const token = AuthService.getAccessToken();
 
   return useQuery<User | null>({
