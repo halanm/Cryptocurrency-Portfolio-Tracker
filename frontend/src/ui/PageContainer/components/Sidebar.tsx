@@ -7,6 +7,7 @@ import logoText from "../../../assets/logo-text.png";
 
 import HomeIcon from "@mui/icons-material/Home";
 import { BaseButton } from "../../BaseButton/BaseButton";
+import { AuthService } from "../../../services/authService";
 
 const navItems = [{ label: "Dashboard", icon: <HomeIcon /> }];
 
@@ -119,6 +120,10 @@ export default function Sidebar({
           expanded={sidebarOpen}
           text="Log out"
           icon={<LogoutIcon />}
+          onClick={() => {
+            AuthService.clearTokens();
+            window.location.href = "/login";
+          }}
         />
       </Box>
     </Drawer>
