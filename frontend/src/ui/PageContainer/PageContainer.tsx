@@ -31,10 +31,9 @@ export function PageContainer({ pageTitle, children }: PageContainerProps) {
       <Header pageTitle={pageTitle} modalOpen={sidebarOpen} />
       <Box
         sx={{
-          flexGrow: 1,
-          marginLeft: sidebarOpen ? "240px" : "95px",
-          marginTop: "5px",
-          padding: "20px",
+          width: `calc(100% - ${sidebarOpen ? "237px" : "87px"})`,
+          marginLeft: sidebarOpen ? "232px" : "82px",
+          marginTop: "10px",
           borderRadius: "8px",
           overflowY: "auto",
           transition:
