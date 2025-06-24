@@ -16,7 +16,6 @@ import TrendingDown from "@mui/icons-material/TrendingDown";
 
 export function UserPortfoliosSummary() {
   const { data: userPortfolios } = useUserPortfolios();
-  console.log("User Portfolios:", userPortfolios);
   return (
     <Grid size={12}>
       <Box
