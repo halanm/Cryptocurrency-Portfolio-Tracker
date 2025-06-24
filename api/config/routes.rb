@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   resources :portfolios, only: [] do
     collection do
+      get "/:portfolio_id/details", to: "portfolios#get_portfolio_details"
       get "/:portfolio_id/trades", to: "trades#get_portfolio_trades"
       post "/:portfolio_id/trades", to: "trades#create_trade"
     end
