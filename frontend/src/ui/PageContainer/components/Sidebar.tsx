@@ -5,14 +5,16 @@ import ViewSidebarIcon from "@mui/icons-material/ViewSidebarRounded";
 import logoIcon from "../../../assets/logo-icon.png";
 import logoText from "../../../assets/logo-text.png";
 
-import HomeIcon from "@mui/icons-material/Home";
 import { BaseButton } from "../../BaseButton/BaseButton";
 import { AuthService } from "../../../services/authService";
 import { useNavigate } from "react-router";
 
+import HomeIcon from "@mui/icons-material/Home";
+import BusinessIcon from "@mui/icons-material/BusinessCenter";
+
 const navItems = [
   { label: "Dashboard", icon: <HomeIcon />, route: "/" },
-  { label: "Portfolios", icon: <HomeIcon />, route: "/portfolios" },
+  { label: "Portfolios", icon: <BusinessIcon />, route: "/portfolios" },
 ];
 
 type SidebarProps = {
