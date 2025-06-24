@@ -1,4 +1,4 @@
-import Dashboard from "../pages/private/home/Dashboard";
+import Dashboard from "../pages/private/Dashboard/Dashboard";
 
 export const privateRoutes = [
   {
