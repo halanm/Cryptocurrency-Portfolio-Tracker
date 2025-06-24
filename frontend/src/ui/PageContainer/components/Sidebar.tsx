@@ -8,8 +8,12 @@ import logoText from "../../../assets/logo-text.png";
 import HomeIcon from "@mui/icons-material/Home";
 import { BaseButton } from "../../BaseButton/BaseButton";
 import { AuthService } from "../../../services/authService";
+import { useNavigate } from "react-router";
 
-const navItems = [{ label: "Dashboard", icon: <HomeIcon /> }];
+const navItems = [
+  { label: "Dashboard", icon: <HomeIcon />, route: "/" },
+  { label: "Portfolios", icon: <HomeIcon />, route: "/portfolios" },
+];
 
 type SidebarProps = {
   currentPage: string;
@@ -22,6 +26,8 @@ export default function Sidebar({
   sidebarOpen,
   setSidebarOpen,
 }: SidebarProps) {
+  const navigate = useNavigate();
+
   return (
     <Drawer
       variant="permanent"
@@ -82,14 +88,16 @@ export default function Sidebar({
           alignItems: "center",
         }}
       >
-        {navItems.map(({ label, icon }) => (
+        {navItems.map(({ label, icon, route }) => (
           <SideBarButton
             key={label}
             expanded={sidebarOpen}
             text={label}
             icon={icon}
             active={label === currentPage}
-            onClick={() => console.log(`${label} clicked`)}
+            onClick={() => {
+              navigate(route);
+            }}
           />
         ))}
       </Box>
