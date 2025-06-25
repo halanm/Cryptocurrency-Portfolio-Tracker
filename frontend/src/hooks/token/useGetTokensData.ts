@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Coin } from "../../domain/Coin";
+import type { Token } from "../../domain/Token";
 import axios from "axios";
 import { useUser } from "../user/useUserContext";
 
@@ -12,7 +12,7 @@ export const useGetTokensData = ({ tokens }: UseGetTokensDataParams) => {
 
   const preferred_currency = user?.preferred_currency || "usd";
 
-  return useQuery<Coin[] | null>({
+  return useQuery<Token[] | null>({
     queryKey: ["tokens", tokens],
     queryFn: async () => {
       const res = await axios.get(
