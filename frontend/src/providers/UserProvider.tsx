@@ -1,4 +1,4 @@
-import { useUserInfo } from "../hooks/user/useUserInfo";
+import { useGetUserInfo } from "../hooks/user/useGetUserInfo";
 import { UserContext } from "../contexts/UserContext";
 
 interface UserProviderProps {
@@ -6,7 +6,7 @@ interface UserProviderProps {
 }
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const { data: user, isLoading, isError } = useUserInfo();
+  const { data: user, isLoading, isError } = useGetUserInfo();
 
   return (
     <UserContext.Provider
