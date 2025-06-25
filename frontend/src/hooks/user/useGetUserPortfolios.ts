@@ -3,7 +3,7 @@ import { api } from "../../lib/axiosInstance";
 import { AuthService } from "../../services/authService";
 import type { Portfolio } from "../../domain/Portfolio";
 
-export const useUserPortfolios = () => {
+export const useGetUserPortfolios = () => {
   const token = AuthService.getAccessToken();
 
   return useQuery<Portfolio[] | null>({
