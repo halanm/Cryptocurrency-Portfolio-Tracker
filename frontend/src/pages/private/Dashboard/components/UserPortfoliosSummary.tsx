@@ -9,13 +9,13 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useUserPortfolios } from "../../../../hooks/user/useUserPortfolios";
+import { useGetUserPortfolios } from "../../../../hooks/user/useGetUserPortfolios";
 
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import TrendingDown from "@mui/icons-material/TrendingDown";
 
 export function UserPortfoliosSummary() {
-  const { data: userPortfolios } = useUserPortfolios();
+  const { data: userPortfolios } = useGetUserPortfolios();
   return (
     <Grid size={12}>
       <Box
@@ -39,7 +39,7 @@ export function UserPortfoliosSummary() {
               sx={{ backgroundColor: "var(--mui-palette-secondary-main)" }}
             >
               <TableRow>
-                <TableCell>Porfolio</TableCell>
+                <TableCell>Portfolio</TableCell>
                 <TableCell>Total Invested</TableCell>
                 <TableCell>Current Value</TableCell>
                 <TableCell>Total Return</TableCell>
