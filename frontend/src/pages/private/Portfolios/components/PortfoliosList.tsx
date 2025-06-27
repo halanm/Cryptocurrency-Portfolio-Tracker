@@ -9,7 +9,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useUserPortfolios } from "../../../../hooks/user/useUserPortfolios";
+import { useGetUserPortfolios } from "../../../../hooks/user/useGetUserPortfolios";
 
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import TrendingDown from "@mui/icons-material/TrendingDown";
@@ -17,7 +17,7 @@ import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
 import { useNavigate } from "react-router";
 
 export function PortfoliosList() {
-  const { data: userPortfolios } = useUserPortfolios();
+  const { data: userPortfolios } = useGetUserPortfolios();
 
   const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ export function PortfoliosList() {
               sx={{ backgroundColor: "var(--mui-palette-secondary-main)" }}
             >
               <TableRow>
-                <TableCell>Porfolio</TableCell>
+                <TableCell>Portfolio</TableCell>
                 <TableCell>Total Invested</TableCell>
                 <TableCell>Current Value</TableCell>
                 <TableCell>Total Return</TableCell>
@@ -72,8 +72,8 @@ export function PortfoliosList() {
                       }}
                     >
                       <Typography variant="body1" sx={{ marginLeft: "8px" }}>
-                        {portfolio.total_return > 0 ? "+" : ""}$
-                        {portfolio.total_return.toFixed(2)}
+                        {portfolio.total_return > 0 ? "+" : "-"}$
+                        {Math.abs(portfolio.total_return).toFixed(2)}
                       </Typography>
                       {portfolio.total_return > 0 ? (
                         <TrendingUp sx={{ marginLeft: "8px" }} />
