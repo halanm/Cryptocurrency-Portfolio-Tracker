@@ -7,7 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { useGetTokensData } from "../../../../hooks/coins/useGetTokensData";
+import { useGetTokensData } from "../../../../hooks/token/useGetTokensData";
 import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
 
 export function FixedTokenCards() {
@@ -55,8 +55,8 @@ export function FixedTokenCards() {
                   variant="body2"
                   color={coin.price_change_24h < 0 ? "error" : "success"}
                 >
-                  {coin.price_change_24h > 0 ? "+" : ""}$
-                  {coin.price_change_24h.toFixed(2)}
+                  {coin.price_change_24h > 0 ? "+" : "-"}$
+                  {Math.abs(coin.price_change_24h).toFixed(2)}
                 </Typography>
               </Box>
             </CardContent>
