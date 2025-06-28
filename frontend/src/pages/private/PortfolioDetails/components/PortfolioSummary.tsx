@@ -1,11 +1,15 @@
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import type { Portfolio } from "../../../../domain/Portfolio";
+import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
+import { useNavigate } from "react-router";
 
 type PortfolioSummaryProps = {
   portfolio?: Portfolio | null;
 };
 
 export function PortfolioSummary({ portfolio }: PortfolioSummaryProps) {
+  const navigate = useNavigate();
+
   return portfolio ? (
     <Grid size={8}>
       <Box
@@ -16,7 +20,21 @@ export function PortfolioSummary({ portfolio }: PortfolioSummaryProps) {
           padding: "16px",
         }}
       >
-        <Typography variant="h6">Portfolio Summary</Typography>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            Portfolio Summary
+          </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <BaseButton
+            color="primary"
+            size="small"
+            onClick={() => {
+              navigate(`/trade?portfolio_id=${portfolio.id}`);
+            }}
+          >
+            Make a new trade
+          </BaseButton>
+        </Box>
         <Box sx={{ marginTop: "16px" }}>
           <Typography variant="body2">Total portfolio value</Typography>
           <Typography variant="h5" sx={{ fontWeight: "bold" }}>
