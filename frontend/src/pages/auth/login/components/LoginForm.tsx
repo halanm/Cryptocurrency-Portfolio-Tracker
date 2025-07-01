@@ -21,10 +21,13 @@ export function LoginForm() {
         onSuccess: () => {
           window.location.href = "/";
         },
-        onError: (error: Error) => {
-          showError(
-            (error as ApiError).response?.data?.error || "Login failed"
-          );
+        onError: (e: Error) => {
+          const error = e as ApiError;
+          if (error.response?.data?.errors) {
+            error.response.data.errors.forEach((err) => showError(err));
+          } else {
+            showError(error.response?.data?.error || "Login failed");
+          }
         },
       }
     );
