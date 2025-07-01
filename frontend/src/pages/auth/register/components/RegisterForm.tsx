@@ -1,21 +1,40 @@
 import { Box, TextField } from "@mui/material";
 import { useState } from "react";
-import { useLoginMutation } from "../../../../hooks/auth/useLoginMutation";
 import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
+import { useAlert } from "../../../../hooks/alert/useAlert";
+import type { ApiError } from "../../../../lib/axiosInstance";
+import { useSignupMutation } from "../../../../hooks/auth/useSignupMutation";
 
 export function RegisterForm() {
+  const { showError } = useAlert();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const { mutate: login } = useLoginMutation();
+  const { mutate: signup } = useSignupMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    login(
+
+    if (password !== confirmPassword) {
+      showError("Passwords do not match");
+      return;
+    }
+
+    signup(
       { email, password },
       {
         onSuccess: () => {
           window.location.href = "/";
+        },
+        onError: (e: Error) => {
+          const error = e as ApiError;
+          if (error.response?.data?.errors) {
+            error.response.data.errors.forEach((err) => showError(err));
+          } else {
+            showError(error.response?.data?.error || "Signup failed");
+          }
         },
       }
     );
@@ -49,8 +68,8 @@ export function RegisterForm() {
         fullWidth
         margin="normal"
         size="small"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
         required
       />
       <BaseButton
