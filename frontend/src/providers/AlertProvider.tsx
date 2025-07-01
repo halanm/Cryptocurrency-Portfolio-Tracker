@@ -33,7 +33,7 @@ export const AlertProvider = ({ children }: { children: React.ReactNode }) => {
     () => ({
       alert,
       showSuccess: (message: string) => createAlert(message, "success"),
-      showError: (message: string) => createAlert(message, "warning"),
+      showError: (message: string) => createAlert(message, "error"),
       closeAlert,
     }),
     [alert, createAlert, closeAlert]
