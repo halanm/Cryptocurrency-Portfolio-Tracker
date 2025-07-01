@@ -7,15 +7,20 @@ WORKDIR /api
 
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y \
-    curl \
-    libjemalloc2 \
-    libvips \
-    postgresql-client \
-    build-essential \
-    git \
-    libpq-dev \
-    libyaml-dev \
-    pkg-config && \
+      curl \
+      libjemalloc2 \
+      libvips \
+      postgresql-client \
+      build-essential \
+      libsecp256k1-dev \
+      ruby-dev \
+      git \
+      libpq-dev \
+      libyaml-dev \
+      pkg-config \
+      autoconf \
+      automake \
+      libtool && \
     rm -rf /var/lib/apt/lists/*
 
 ENV BUNDLE_PATH="/usr/local/bundle"
