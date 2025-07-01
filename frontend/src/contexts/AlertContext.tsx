@@ -12,6 +12,6 @@ export const AlertContext = createContext({} as AlertContext);
 export type Alert = {
   id: string;
   message: string;
-  type?: "warning" | "success";
+  type?: "error" | "success";
   timeout: NodeJS.Timeout;
 };
