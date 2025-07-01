@@ -2,8 +2,9 @@ class User < ApplicationRecord
   has_many :portfolios, dependent: :destroy
   has_many :wallets, dependent: :destroy
 
-  has_secure_password
+  has_secure_password validations: false
   
+  validates :password, presence: true, if: -> { email.present? && !wallet_address.present? }
   validates :wallet_address, presence: true, unless: -> { email.present? && password_digest.present? }
   validates :email, presence: true, unless: -> { wallet_address.present? }
 
