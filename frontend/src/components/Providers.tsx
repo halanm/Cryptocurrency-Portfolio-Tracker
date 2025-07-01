@@ -5,6 +5,7 @@ import { UserProvider } from "../providers/UserProvider";
 import { WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { WalletAuthProvider } from "../providers/WalletAuthProvider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const theme = createTheme({
@@ -41,16 +42,18 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const queryClient = new QueryClient();
 
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider modalSize="compact">
-          <ThemeProvider theme={theme}>
-            <UserProvider>
-              <AlertProvider>{children}</AlertProvider>
-            </UserProvider>
-          </ThemeProvider>
-        </RainbowKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <AlertProvider>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <WalletAuthProvider>
+            <RainbowKitProvider modalSize="compact">
+              <ThemeProvider theme={theme}>
+                <UserProvider>{children}</UserProvider>
+              </ThemeProvider>
+            </RainbowKitProvider>
+          </WalletAuthProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </AlertProvider>
   );
 }
