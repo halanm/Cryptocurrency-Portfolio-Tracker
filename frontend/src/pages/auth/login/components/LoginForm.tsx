@@ -2,8 +2,12 @@ import { Box, Link, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useLoginMutation } from "../../../../hooks/auth/useLoginMutation";
 import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
+import type { ApiError } from "../../../../lib/axiosInstance";
+import { useAlert } from "../../../../hooks/alert/useAlert";
 
 export function LoginForm() {
+  const { showError } = useAlert();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,6 +20,11 @@ export function LoginForm() {
       {
         onSuccess: () => {
           window.location.href = "/";
+        },
+        onError: (error: Error) => {
+          showError(
+            (error as ApiError).response?.data?.error || "Login failed"
+          );
         },
       }
     );
