@@ -9,8 +9,10 @@ import {
 } from "@mui/material";
 import { useGetTokensData } from "../../../../hooks/token/useGetTokensData";
 import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
+import { useUser } from "../../../../hooks/user/useUserContext";
 
 export function FixedTokenCards() {
+  const { user } = useUser();
   const { data: trendingCoins } = useGetTokensData({ tokens: "btc,eth,usdt" });
 
   return (
@@ -49,14 +51,16 @@ export function FixedTokenCards() {
               </Box>
               <Box textAlign={"right"}>
                 <Typography variant="h6" component="div">
-                  ${coin.current_price.toLocaleString()}
+                  {coin.current_price.toLocaleString()}{" "}
+                  {user?.preferred_currency || "USD"}
                 </Typography>
                 <Typography
                   variant="body2"
                   color={coin.price_change_24h < 0 ? "error" : "success"}
                 >
-                  {coin.price_change_24h > 0 ? "+" : "-"}$
-                  {Math.abs(coin.price_change_24h).toFixed(2)}
+                  {coin.price_change_24h > 0 ? "+" : "-"}
+                  {Math.abs(coin.price_change_24h).toLocaleString()}{" "}
+                  {user?.preferred_currency || "USD"}
                 </Typography>
               </Box>
             </CardContent>

@@ -13,12 +13,15 @@ import type { Portfolio } from "../../../../domain/Portfolio";
 
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import TrendingDown from "@mui/icons-material/TrendingDown";
+import { useUser } from "../../../../hooks/user/useUserContext";
 
 type TokensViewProps = {
   portfolio?: Portfolio | null;
 };
 
 export function TokensView({ portfolio }: TokensViewProps) {
+  const { user } = useUser();
+
   return portfolio ? (
     <Grid size={12}>
       <Box
@@ -82,10 +85,19 @@ export function TokensView({ portfolio }: TokensViewProps) {
                       </Box>
                     </Box>
                   </TableCell>
-                  <TableCell>${token.current_price.toFixed(2)}</TableCell>
+                  <TableCell>
+                    {token.current_price.toFixed(2)}{" "}
+                    {user?.preferred_currency || "USD"}
+                  </TableCell>
                   <TableCell>{token.quantity.toFixed(4)}</TableCell>
-                  <TableCell>${token.total_invested.toFixed(2)}</TableCell>
-                  <TableCell>${token.current_value.toFixed(2)}</TableCell>
+                  <TableCell>
+                    {token.total_invested.toFixed(2)}{" "}
+                    {user?.preferred_currency || "USD"}
+                  </TableCell>
+                  <TableCell>
+                    {token.current_value.toFixed(2)}{" "}
+                    {user?.preferred_currency || "USD"}
+                  </TableCell>
                   <TableCell>
                     <Box
                       sx={{

@@ -2,12 +2,14 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 import type { Portfolio } from "../../../../domain/Portfolio";
 import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
 import { useNavigate } from "react-router";
+import { useUser } from "../../../../hooks/user/useUserContext";
 
 type PortfolioSummaryProps = {
   portfolio?: Portfolio | null;
 };
 
 export function PortfolioSummary({ portfolio }: PortfolioSummaryProps) {
+  const { user } = useUser();
   const navigate = useNavigate();
 
   return portfolio ? (
@@ -38,14 +40,16 @@ export function PortfolioSummary({ portfolio }: PortfolioSummaryProps) {
         <Box sx={{ marginTop: "16px" }}>
           <Typography variant="body2">Total portfolio value</Typography>
           <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-            ${portfolio.current_value.toLocaleString()}
+            {portfolio.current_value.toLocaleString()}{" "}
+            {user?.preferred_currency || "USD"}
           </Typography>
           <Typography
             variant="body2"
             color={portfolio.change_24h_percentage < 0 ? "error" : "success"}
           >
-            {portfolio.change_24h_percentage > 0 ? "+" : "-"}$
-            {Math.abs(portfolio.change_24h_percentage).toFixed(2)}
+            {portfolio.change_24h_percentage > 0 ? "+" : "-"}
+            {Math.abs(portfolio.change_24h_percentage).toFixed(2)}{" "}
+            {user?.preferred_currency || "USD"}
           </Typography>
         </Box>
         <Box
@@ -59,7 +63,8 @@ export function PortfolioSummary({ portfolio }: PortfolioSummaryProps) {
           <Stack direction="row" justifyContent="space-between">
             <Typography variant="body2">Total invested</Typography>
             <Typography variant="body2" sx={{ fontWeight: "bold" }}>
-              ${portfolio.total_invested.toLocaleString()}
+              {portfolio.total_invested.toLocaleString()}{" "}
+              {user?.preferred_currency || "USD"}
             </Typography>
           </Stack>
           <Stack
@@ -76,8 +81,9 @@ export function PortfolioSummary({ portfolio }: PortfolioSummaryProps) {
                   portfolio.total_return >= 0 ? "success.main" : "error.main",
               }}
             >
-              {portfolio.total_return >= 0 ? "+" : "-"}$
-              {Math.abs(portfolio.total_return).toFixed(2)}
+              {portfolio.total_return >= 0 ? "+" : "-"}
+              {Math.abs(portfolio.total_return).toFixed(2)}{" "}
+              {user?.preferred_currency || "USD"}
             </Typography>
           </Stack>
           <Stack

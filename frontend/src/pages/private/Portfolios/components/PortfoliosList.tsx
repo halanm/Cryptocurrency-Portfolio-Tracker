@@ -15,8 +15,10 @@ import TrendingUp from "@mui/icons-material/TrendingUp";
 import TrendingDown from "@mui/icons-material/TrendingDown";
 import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
 import { useNavigate } from "react-router";
+import { useUser } from "../../../../hooks/user/useUserContext";
 
 export function PortfoliosList() {
+  const { user } = useUser();
   const { data: userPortfolios } = useGetUserPortfolios();
 
   const navigate = useNavigate();
@@ -56,8 +58,14 @@ export function PortfoliosList() {
               {userPortfolios?.map((portfolio) => (
                 <TableRow key={portfolio.id}>
                   <TableCell>{portfolio.name}</TableCell>
-                  <TableCell>${portfolio.total_invested.toFixed(2)}</TableCell>
-                  <TableCell>${portfolio.current_value.toFixed(2)}</TableCell>
+                  <TableCell>
+                    {portfolio.total_invested.toFixed(2)}{" "}
+                    {user?.preferred_currency || "USD"}
+                  </TableCell>
+                  <TableCell>
+                    {portfolio.current_value.toFixed(2)}{" "}
+                    {user?.preferred_currency || "USD"}
+                  </TableCell>
                   <TableCell>
                     <Box
                       sx={{
@@ -72,8 +80,9 @@ export function PortfoliosList() {
                       }}
                     >
                       <Typography variant="body1" sx={{ marginLeft: "8px" }}>
-                        {portfolio.total_return > 0 ? "+" : "-"}$
-                        {Math.abs(portfolio.total_return).toFixed(2)}
+                        {portfolio.total_return > 0 ? "+" : "-"}
+                        {Math.abs(portfolio.total_return).toFixed(2)}{" "}
+                        {user?.preferred_currency || "USD"}
                       </Typography>
                       {portfolio.total_return > 0 ? (
                         <TrendingUp sx={{ marginLeft: "8px" }} />

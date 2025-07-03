@@ -13,8 +13,10 @@ import { useGetUserPortfolios } from "../../../../hooks/user/useGetUserPortfolio
 
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import TrendingDown from "@mui/icons-material/TrendingDown";
+import { useUser } from "../../../../hooks/user/useUserContext";
 
 export function UserPortfoliosSummary() {
+  const { user } = useUser();
   const { data: userPortfolios } = useGetUserPortfolios();
   return (
     <Grid size={12}>
@@ -50,8 +52,14 @@ export function UserPortfoliosSummary() {
               {userPortfolios?.map((portfolio) => (
                 <TableRow key={portfolio.id}>
                   <TableCell>{portfolio.name}</TableCell>
-                  <TableCell>${portfolio.total_invested.toFixed(2)}</TableCell>
-                  <TableCell>${portfolio.current_value.toFixed(2)}</TableCell>
+                  <TableCell>
+                    {portfolio.total_invested.toFixed(2)}{" "}
+                    {user?.preferred_currency || "USD"}
+                  </TableCell>
+                  <TableCell>
+                    {portfolio.current_value.toFixed(2)}{" "}
+                    {user?.preferred_currency || "USD"}
+                  </TableCell>
                   <TableCell>
                     <Box
                       sx={{
@@ -66,8 +74,9 @@ export function UserPortfoliosSummary() {
                       }}
                     >
                       <Typography variant="body1" sx={{ marginLeft: "8px" }}>
-                        {portfolio.total_return > 0 ? "+" : ""}$
-                        {portfolio.total_return.toFixed(2)}
+                        {portfolio.total_return > 0 ? "+" : ""}
+                        {portfolio.total_return.toFixed(2)}{" "}
+                        {user?.preferred_currency || "USD"}
                       </Typography>
                       {portfolio.total_return > 0 ? (
                         <TrendingUp sx={{ marginLeft: "8px" }} />

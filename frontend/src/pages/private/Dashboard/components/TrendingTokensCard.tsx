@@ -12,8 +12,10 @@ import { useGetTrendingTokens } from "../../../../hooks/token/useGetTrendingToke
 
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import TrendingDown from "@mui/icons-material/TrendingDown";
+import { useUser } from "../../../../hooks/user/useUserContext";
 
 export function TrendingTokensCard() {
+  const { user } = useUser();
   const { data: trendingTokens } = useGetTrendingTokens();
 
   return (
@@ -70,7 +72,9 @@ export function TrendingTokensCard() {
                     </Typography>
                   </Box>
                 </TableCell>
-                <TableCell>${token.current_price}</TableCell>
+                <TableCell>
+                  {token.current_price} {user?.preferred_currency || "USD"}
+                </TableCell>
                 <TableCell>
                   <Box
                     sx={{
