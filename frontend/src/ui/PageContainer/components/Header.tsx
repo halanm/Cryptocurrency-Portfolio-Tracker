@@ -1,5 +1,6 @@
 import { AppBar, Box, Toolbar, Typography, IconButton } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router";
 
 type HeaderProps = {
   pageTitle: string;
@@ -7,6 +8,8 @@ type HeaderProps = {
 };
 
 export default function Header({ pageTitle, modalOpen }: HeaderProps) {
+  const navigate = useNavigate();
+
   return (
     <AppBar
       position="static"
@@ -26,7 +29,12 @@ export default function Header({ pageTitle, modalOpen }: HeaderProps) {
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography variant="h6">{pageTitle}</Typography>
         <Box>
-          <IconButton color="inherit">
+          <IconButton
+            color="inherit"
+            onClick={() => {
+              navigate("/profile");
+            }}
+          >
             <AccountCircle />
           </IconButton>
         </Box>
