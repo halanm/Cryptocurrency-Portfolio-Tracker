@@ -1,17 +1,27 @@
-import { Autocomplete, Box, Grid, TextField, Typography } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  debounce,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useGetUserPortfolios } from "../../../../hooks/user/useGetUserPortfolios";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
 import { useCreateTradeMutation } from "../../../../hooks/portfolio/useCreateTradeMutation";
 import { useNavigate } from "react-router";
 import { useAlert } from "../../../../hooks/alert/useAlert";
 import type { ApiError } from "../../../../lib/axiosInstance";
+import type { Token } from "../../../../domain/Token";
 
 type NewTradeFormProps = {
   portfolio_id?: string | null;
 };
 
 export function NewTradeForm({ portfolio_id }: NewTradeFormProps) {
+  const [foundTokens, setFoundTokens] = useState<string[]>([]);
+
   const navigate = useNavigate();
   const { showSuccess, showError } = useAlert();
 
@@ -86,7 +96,7 @@ export function NewTradeForm({ portfolio_id }: NewTradeFormProps) {
             )}
           />
           <Autocomplete
-            options={["BTC", "ETH", "SOL", "BNB", "XRP", "DOGE"]}
+            options={foundTokens}
             value={formData.token_symbol}
             onChange={(_, newValue) => {
               setFormData((prev) => ({
@@ -94,6 +104,34 @@ export function NewTradeForm({ portfolio_id }: NewTradeFormProps) {
                 token_symbol: newValue,
               }));
             }}
+            onInputChange={useMemo(() => {
+              const debouncedSearch = debounce(
+                async (newInputValue: string) => {
+                  if (newInputValue.length > 0) {
+                    await fetch(
+                      `https://api.coingecko.com/api/v3/search?query=${newInputValue}`
+                    )
+                      .then((response) => response.json())
+                      .then((data) => {
+                        const tokens = data.coins.map((token: Token) =>
+                          token.symbol.toUpperCase()
+                        );
+                        setFoundTokens(tokens);
+                      })
+                      .catch((error) => {
+                        console.error("Error fetching token data:", error);
+                        showError("Failed to fetch token data");
+                      });
+                  }
+                },
+                500
+              );
+
+              return (_, newInputValue) => {
+                debouncedSearch(newInputValue);
+              };
+            }, [showError])}
+            filterOptions={(x) => x}
             renderInput={(params) => (
               <TextField
                 {...params}
