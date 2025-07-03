@@ -3,12 +3,18 @@ import { useGetUserPortfolios } from "../../../../hooks/user/useGetUserPortfolio
 import { useState } from "react";
 import { BaseButton } from "../../../../ui/BaseButton/BaseButton";
 import { useCreateTradeMutation } from "../../../../hooks/portfolio/useCreateTradeMutation";
+import { useNavigate } from "react-router";
+import { useAlert } from "../../../../hooks/alert/useAlert";
+import type { ApiError } from "../../../../lib/axiosInstance";
 
 type NewTradeFormProps = {
   portfolio_id?: string | null;
 };
 
 export function NewTradeForm({ portfolio_id }: NewTradeFormProps) {
+  const navigate = useNavigate();
+  const { showSuccess, showError } = useAlert();
+
   const { data: userPortfolios } = useGetUserPortfolios();
 
   const [selectedPortfolio, setSelectedPortfolio] = useState(
@@ -30,7 +36,17 @@ export function NewTradeForm({ portfolio_id }: NewTradeFormProps) {
       { portfolio_id: selectedPortfolio?.id, data: formData },
       {
         onSuccess: () => {
-          window.location.href = `/portfolios/${selectedPortfolio?.id}`;
+          showSuccess("Trade created successfully!");
+          navigate(`/portfolios/${selectedPortfolio?.id}`);
+        },
+        onError: (e: Error) => {
+          const error = e as ApiError;
+          console.error("Error creating trade:", error.response);
+          if (error.response?.data?.errors) {
+            error.response.data.errors.forEach((err) => showError(err));
+          } else {
+            showError(error.response?.data?.error || "Failed to create trade");
+          }
         },
       }
     );
