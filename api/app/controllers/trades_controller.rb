@@ -4,12 +4,12 @@ class TradesController < ApplicationController
     portfolio = Portfolio.find_by(id: portfolio_id)
 
     if portfolio.nil?
-      render json: { message: "Portfolio not found." }, status: :not_found
+      render json: { error: "Portfolio not found." }, status: :not_found
       return
     end
 
     if portfolio.user_id != current_user.id
-      render json: { message: "You do not have access to this portfolio." }, status: :forbidden
+      render json: { error: "You do not have access to this portfolio." }, status: :forbidden
       return
     end
 
@@ -35,7 +35,7 @@ class TradesController < ApplicationController
           tokens_price_data[currency][symbol] = { currency.downcase => token['current_price'] }
         end
       else
-        render json: { message: "Failed to fetch token data for currency #{currency}." }, status: :bad_gateway
+        render json: { error: "Failed to fetch token data for currency #{currency}." }, status: :bad_gateway
         return
       end
     end
@@ -50,7 +50,7 @@ class TradesController < ApplicationController
     end
 
     if trades.empty?
-      render json: { message: "No trades found for this portfolio." }, status: :not_found
+      render json: { error: "No trades found for this portfolio." }, status: :not_found
     else
       filtered_trades = trades_with_prices.map { |trade| trade.except('portfolio_id', 'created_at', 'updated_at') }
       render json: filtered_trades, status: :ok
@@ -61,12 +61,12 @@ class TradesController < ApplicationController
     portfolio = Portfolio.find_by(id: portfolio_id)
 
     if portfolio.nil?
-      render json: { message: "Portfolio not found." }, status: :not_found
+      render json: { error: "Portfolio not found." }, status: :not_found
       return
     end
 
     if portfolio.user_id != current_user.id
-      render json: { message: "You do not have access to this portfolio." }, status: :forbidden
+      render json: { error: "You do not have access to this portfolio." }, status: :forbidden
       return
     end
 
@@ -80,11 +80,11 @@ class TradesController < ApplicationController
     if coingecko_response.status == 200 && coingecko_response.body
       tokens = JSON.parse(coingecko_response.body)
       if tokens.empty?
-      render json: { message: "Token not found." }, status: :not_found
+      render json: { error: "Token not found." }, status: :not_found
       return
       end
     else
-      render json: { message: "Failed to fetch token data." }, status: :bad_gateway
+      render json: { error: "Failed to fetch token data." }, status: :bad_gateway
       return
     end
 
