@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   has_secure_password validations: false
   
-  validates :password, presence: true, if: -> { email.present? && !wallet_address.present? }
+  validates :password, presence: true, if: -> { email.present? && !wallet_address.present? && (new_record? || password_digest_changed?) }
   validates :wallet_address, presence: true, unless: -> { email.present? && password_digest.present? }
   validates :email, presence: true, unless: -> { wallet_address.present? }
 
