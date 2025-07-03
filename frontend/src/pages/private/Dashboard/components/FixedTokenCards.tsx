@@ -4,6 +4,7 @@ import {
   CardActions,
   CardContent,
   Grid,
+  Link,
   Stack,
   Typography,
 } from "@mui/material";
@@ -65,14 +66,15 @@ export function FixedTokenCards() {
               </Box>
             </CardContent>
             <CardActions>
-              <BaseButton
-                color="secondary"
-                size="small"
-                fullWidth
+              <Link
                 href={`https://www.coingecko.com/en/coins/${coin.id}`}
+                target="_blank"
+                sx={{ textDecoration: "none", width: "100%" }}
               >
-                Open chart
-              </BaseButton>
+                <BaseButton color="secondary" size="small" fullWidth>
+                  Open chart
+                </BaseButton>
+              </Link>
             </CardActions>
           </Card>
         </Grid>
