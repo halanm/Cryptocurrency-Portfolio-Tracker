@@ -11,12 +11,10 @@ import { useNavigate } from "react-router";
 
 import HomeIcon from "@mui/icons-material/Home";
 import BusinessIcon from "@mui/icons-material/BusinessCenter";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
 
 const navItems = [
   { label: "Dashboard", icon: <HomeIcon />, route: "/" },
   { label: "Portfolios", icon: <BusinessIcon />, route: "/portfolios" },
-  { label: "New Trade", icon: <CreditCardIcon />, route: "/trade" },
 ];
 
 type SidebarProps = {
