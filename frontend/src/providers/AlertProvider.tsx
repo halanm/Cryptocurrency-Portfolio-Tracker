@@ -1,7 +1,8 @@
 import { useCallback, useMemo, useState } from "react";
 import { AlertContext, type Alert } from "../contexts/AlertContext";
+import { v4 as uuidv4 } from "uuid";
 
-const createAlertId = (message: string) => `${message}-${crypto.randomUUID()}`;
+const createAlertId = (message: string) => `${message}-${uuidv4()}`;
 
 export const AlertProvider = ({ children }: { children: React.ReactNode }) => {
   const [alert, setAlert] = useState<Alert | null>(null);
