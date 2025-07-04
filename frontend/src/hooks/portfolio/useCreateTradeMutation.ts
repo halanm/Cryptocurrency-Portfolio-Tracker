@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../../lib/axiosInstance";
 import { AuthService } from "../../services/authService";
 
@@ -14,6 +14,7 @@ type useCreateTradeMutation = {
 };
 
 export const useCreateTradeMutation = () => {
+  const queryClient = useQueryClient();
   const token = AuthService.getAccessToken();
 
   return useMutation({
@@ -24,6 +25,11 @@ export const useCreateTradeMutation = () => {
         },
       });
       return res.data;
+    },
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["portfolio-details", variables.portfolio_id],
+      });
     },
   });
 };

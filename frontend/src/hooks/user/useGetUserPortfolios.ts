@@ -7,7 +7,7 @@ export const useGetUserPortfolios = () => {
   const token = AuthService.getAccessToken();
 
   return useQuery<Portfolio[] | null>({
-    queryKey: ["user-portfolios"],
+    queryKey: ["portfolios"],
     queryFn: async () => {
       const res = await api.get("/users/me/portfolios");
       return res.status === 401 ? null : res.data;

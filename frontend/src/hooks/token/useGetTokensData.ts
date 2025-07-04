@@ -13,7 +13,7 @@ export const useGetTokensData = ({ tokens }: UseGetTokensDataParams) => {
   const preferred_currency = user?.preferred_currency;
 
   return useQuery<Token[] | null>({
-    queryKey: ["tokens", tokens],
+    queryKey: ["tokens-data"],
     queryFn: async () => {
       if (preferred_currency === undefined) {
         throw new Error("Preferred currency is not set");
