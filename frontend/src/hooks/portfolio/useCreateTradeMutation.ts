@@ -26,10 +26,9 @@ export const useCreateTradeMutation = () => {
       });
       return res.data;
     },
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: ["portfolio-details", variables.portfolio_id],
-      });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["portfolios"] });
+      queryClient.invalidateQueries({ queryKey: ["portfolio-details"] });
     },
   });
 };

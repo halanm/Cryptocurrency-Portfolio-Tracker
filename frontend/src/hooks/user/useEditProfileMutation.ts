@@ -19,6 +19,10 @@ export const useEditProfileMutation = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["portfolios"] });
+      queryClient.invalidateQueries({ queryKey: ["portfolio-details"] });
+      queryClient.invalidateQueries({ queryKey: ["tokens-data"] });
+      queryClient.invalidateQueries({ queryKey: ["trending-tokens"] });
     },
   });
 };
