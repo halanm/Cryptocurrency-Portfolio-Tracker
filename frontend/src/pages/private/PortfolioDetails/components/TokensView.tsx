@@ -86,16 +86,16 @@ export function TokensView({ portfolio }: TokensViewProps) {
                     </Box>
                   </TableCell>
                   <TableCell>
-                    {token.current_price.toLocaleString()}{" "}
+                    {token?.current_price?.toLocaleString()}{" "}
                     {user?.preferred_currency || "USD"}
                   </TableCell>
                   <TableCell>{token.quantity.toFixed(4)}</TableCell>
                   <TableCell>
-                    {token.total_invested.toLocaleString()}{" "}
+                    {token?.total_invested?.toLocaleString()}{" "}
                     {user?.preferred_currency || "USD"}
                   </TableCell>
                   <TableCell>
-                    {token.current_value.toLocaleString()}{" "}
+                    {token?.current_value?.toLocaleString()}{" "}
                     {user?.preferred_currency || "USD"}
                   </TableCell>
                   <TableCell>
