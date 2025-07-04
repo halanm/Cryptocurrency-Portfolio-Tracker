@@ -2,7 +2,37 @@
 
 A full-stack application for managing cryptocurrency portfolios.
 
----
+## Technologies Used
+
+- **Backend:** Ruby on Rails, PostgreSQL, Redis
+- **Frontend:** React, Vite
+- **Containerization:** Docker, Docker Compose
+
+## User Flows
+
+### User Registration
+
+![Signup](https://github.com/user-attachments/assets/eecf39c2-be02-4263-923a-4b802ba511e1)
+
+### User Login
+
+![Login](https://github.com/user-attachments/assets/5799a20d-d9a4-4c7d-9d1f-403e27a9582f)
+
+### Wallet Login
+
+![Wallet Login](https://github.com/user-attachments/assets/04b6be72-4383-4f7f-a5dd-456f06801e98)
+
+### Edit User Prefered Currency
+
+![Edit User Currency](https://github.com/user-attachments/assets/aa5decb7-636e-4287-a9d7-db0f984b42d8)
+
+### Create Portfolio
+
+![Portfolio Creation](https://github.com/user-attachments/assets/b22c5b69-ba39-477a-8afa-c4bfa45571b2)
+
+### Add Trade to Portfolio
+
+![Trade Creation](https://github.com/user-attachments/assets/c954df74-ccfb-40db-b0f3-f6d6351c32d0)
 
 ## Setup Instructions (Docker - Development Environment)
 
@@ -43,11 +73,11 @@ A full-stack application for managing cryptocurrency portfolios.
 
    - The React frontend will be available at [http://localhost:5173](http://localhost:5173)
 
----
-
 ## API Routes
 
 Postman collection available [here](https://www.postman.com/aerospace-administrator-44389575/workspace/cpt/collection/22480061-1bce668a-a7e7-4519-be50-6cb5fafbcb31?action=share&creator=22480061).
+
+---
 
 ### Authentication
 
