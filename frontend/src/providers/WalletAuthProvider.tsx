@@ -30,10 +30,13 @@ export function WalletAuthProvider({
     },
 
     verify: async ({ message, signature }) => {
-      const res = await api.post("http://localhost:3000/auth/verify", {
-        message,
-        signature,
-      });
+      const res = await api.post(
+        `${import.meta.env.VITE_API_BASE_URL}/auth/verify`,
+        {
+          message,
+          signature,
+        }
+      );
 
       if (res.status !== 200 && res.status !== 201) {
         return false;
