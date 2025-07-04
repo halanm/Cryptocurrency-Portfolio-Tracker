@@ -32,14 +32,21 @@ export function PortfoliosList() {
           borderRadius: "8px",
         }}
       >
-        <Typography
-          variant="h6"
-          sx={{
-            padding: "16px",
-          }}
-        >
-          Your Portfolios
-        </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", padding: "16px" }}>
+          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+            Your Portfolios
+          </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <BaseButton
+            color="primary"
+            size="small"
+            onClick={() => {
+              navigate(`/new-portfolio`);
+            }}
+          >
+            Create New Portfolio
+          </BaseButton>
+        </Box>
         <TableContainer>
           <Table aria-label="simple table">
             <TableHead
