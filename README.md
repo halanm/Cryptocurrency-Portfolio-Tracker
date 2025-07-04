@@ -47,6 +47,8 @@ A full-stack application for managing cryptocurrency portfolios.
 
 ## API Routes
 
+Postman collection available [here](https://www.postman.com/aerospace-administrator-44389575/workspace/cpt/collection/22480061-1bce668a-a7e7-4519-be50-6cb5fafbcb31?action=share&creator=22480061).
+
 ### Authentication
 
 - `POST /auth/signup`  
